@@ -1,0 +1,127 @@
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+body {
+    padding: 50px 0 0;
+    /*margin-bottom: 60px;*/
+}
+
+a:hover {
+    cursor:pointer;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.header {
+//border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+}
+
+.page-header {
+    border-bottom: 1px solid #959595;
+}
+
+/* Custom page footer */
+.footer {
+//padding-top: 19px;
+    color: #777;
+//border-top: 1px solid #e5e5e5;
+}
+
+.a-link {
+    color: #337ab7;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.help-block{
+    color: #a94442;
+}
+
+.has-success input {
+    background: #E3FFE3;
+}
+
+.has-error input {
+    background: #FFF0F4;
+}
+
+.alert-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+
+.hr-xs{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.redactor-box {
+    margin-bottom: 0;
+}
+
+#loading-bar .bar {
+    background: #FF0000;
+    height: 2px;
+}
+
+#loading-bar-spinner .spinner-icon {
+    border-top-color: #FF0000;
+    border-left-color: #FF0000;
+}
+
+.photo{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 5px;
+    background: #ededed;
+    display: inline-block;
+}
+
+.photo img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.uk-flag-background{
+    background-size:     cover;
+    background: url(/static/assets/images/loading.gif);
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+.input-without-focus:focus{
+    outline: none;
+    webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+@media print
+{
+    .non-printable { display: none; }
+    .printable { display: block; }
+}

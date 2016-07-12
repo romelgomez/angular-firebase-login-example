@@ -1,0 +1,74 @@
+<script type="text/ng-template" id="accountProfileDetailsModal.html">
+  <div class="modal-header">
+    <h3 class="modal-title">Extend or Change Profile Details</h3>
+  </div>
+  <div class="modal-body" cg-busy="{promise:httpRequestPromise,message:'Just a moment'}">
+
+    <form id="profileDetails" name="forms.profileDetails" novalidate="" ng-submit="submit()">
+
+      <div class="form-group" ng-class="{'has-success has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.names.$valid),'has-error has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.names.$invalid) }">
+        <label class="control-label"> Names <sup style="color: red;">*</sup></label>
+        <input type="text" name="names" ng-model="model.names" ng-trim no-special-chars required capitalize class="form-control" placeholder="">
+        <span ng-show="forms.profileDetails.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.profileDetails.names.$valid),'glyphicon-remove': ( forms.profileDetails.names.$invalid) }" aria-hidden="true"></span>
+        <div data-ng-messages="forms.profileDetails.$submitted && forms.profileDetails.names.$error" class="help-block">
+          <div data-ng-message="required">
+            - The <b>names</b> are required.
+          </div>
+          <div data-ng-message="noSpecialChars">
+            - Not allowed to use special characters.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-success has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.lastNames.$valid),'has-error has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.lastNames.$invalid) }">
+        <label class="control-label"> Last Names <sup style="color: red;">*</sup></label>
+        <input type="text" name="lastNames" ng-model="model.lastNames" ng-trim no-special-chars required capitalize class="form-control" placeholder="">
+        <span ng-show="forms.profileDetails.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.profileDetails.lastNames.$valid),'glyphicon-remove': ( forms.profileDetails.lastNames.$invalid) }" aria-hidden="true"></span>
+        <div data-ng-messages="forms.profileDetails.$submitted && forms.profileDetails.lastNames.$error" class="help-block">
+          <div data-ng-message="required">
+            - The <b>last names</b> are required.
+          </div>
+          <div data-ng-message="noSpecialChars">
+            - Not allowed to use special characters.
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="profile.provider !== 'password'" class="form-group" ng-class="{'has-success has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.email.$valid),'has-error has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.email.$invalid) }">
+        <label class="control-label"><i class="fa fa-envelope"></i> Email</label>
+        <input type="email" name="email" ng-model="model.email" class="form-control" placeholder="">
+        <span ng-show="forms.profileDetails.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.profileDetails.email.$valid),'glyphicon-remove': ( forms.profileDetails.email.$invalid) }" aria-hidden="true"></span>
+        <div data-ng-messages="forms.emailAccount.$submitted && forms.emailAccount.email.$error" class="help-block">
+          <div data-ng-message="email">
+            - The <b>email</b> must be valid.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-success has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.twitterAccount.$valid),'has-error has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.twitterAccount.$invalid) }">
+        <label class="control-label"><i class="fa fa-twitter"></i> Twitter account</label>
+        <input type="text" name="twitterAccount" ng-model="model.twitterAccount" ng-trim no-special-chars class="form-control" placeholder="">
+        <span ng-show="forms.profileDetails.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.profileDetails.twitterAccount.$valid),'glyphicon-remove': ( forms.profileDetails.twitterAccount.$invalid) }" aria-hidden="true"></span>
+        <div data-ng-messages="forms.profileDetails.$submitted && forms.profileDetails.twitterAccount.$error" class="help-block">
+          <div data-ng-message="noSpecialChars">
+            - Not allowed to use special characters.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-success has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.facebookAccount.$valid),'has-error has-feedback': (forms.profileDetails.$submitted && forms.profileDetails.facebookAccount.$invalid) }">
+        <label class="control-label"><i class="fa fa-facebook-official"></i> Facebook account</label>
+        <input type="text" name="facebookAccount" ng-model="model.facebookAccount" ng-trim class="form-control" placeholder="">
+        <span ng-show="forms.profileDetails.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.profileDetails.facebookAccount.$valid),'glyphicon-remove': ( forms.profileDetails.facebookAccount.$invalid) }" aria-hidden="true"></span>
+      </div>
+
+    </form>
+
+    <div class="alert alert-info alert-xs" style="margin-bottom: 0; margin-top: 10px; " role="alert">NOTE: This superscript <sup style="color: red;">*</sup> mean that, input field is required.</div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button form="profileDetails" class="btn btn-primary" type="submit">Save</button>
+  </div>
+</script>

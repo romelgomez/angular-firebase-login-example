@@ -1,0 +1,7 @@
+.sass-cache
+bower_components
+node_modules
+.idea
+angular-firebase-login.iml
+.tmp
+npm-debug.log

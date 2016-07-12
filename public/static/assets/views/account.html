@@ -1,0 +1,26 @@
+<div class="container" style="margin-top: 17px;">
+
+  <div ng-show="!lording.isDone" cg-busy="{promise:lording.promise,message:'Just a moment'}">
+    <div>
+      <div class="panel panel-default uk-flag-background"  style="height: 600px;">
+        <div class="panel-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default" ng-show="lording.isDone">
+    <div class="panel-heading">
+      <h3 class="panel-title">Account <i class="fa fa-wrench"></i></h3>
+    </div>
+    <div class="panel-body">
+
+      <ng-include src="'static/assets/views/account/accountProfile.html'"></ng-include>
+
+    </div>
+  </div>
+
+</div>
+
+<ng-include src="'static/assets/views/account/modals/accountProfileDetailsModal.html'"></ng-include>

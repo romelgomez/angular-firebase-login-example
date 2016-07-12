@@ -1,0 +1,314 @@
+<div class="container" style="margin-top: 17px;">
+
+  <div class="panel panel-default" cg-busy="{promise:httpRequestPromise,message:'Just a moment'}">
+    <div class="panel-heading">
+      <h3 class="panel-title">Login Page</h3>
+    </div>
+    <div class="panel-body">
+
+      <uib-tabset>
+        <uib-tab heading="I'm a returning">
+
+          <div style="margin-top: 10px;">
+
+            <div ng-form="forms.signIn" style="margin-top: 10px;">
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.signIn.$submitted && forms.signIn.email.$valid),'has-error has-feedback': (forms.signIn.$submitted && forms.signIn.email.$invalid) }">
+                <label class="control-label"><i class="fa fa-envelope"></i> Email <sup style="color: red;">*</sup></label>
+                <input type="email" name="email" ng-model="model.signIn.email" required class="form-control" placeholder="">
+                <span ng-show="forms.signIn.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.signIn.email.$valid),'glyphicon-remove': ( forms.signIn.email.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.signIn.$submitted && forms.signIn.email.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>email</b> is required.
+                  </div>
+                  <div data-ng-message="email">
+                    - The <b>email</b> must be valid.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.signIn.$submitted && forms.signIn.password.$valid),'has-error has-feedback': (forms.signIn.$submitted && forms.signIn.password.$invalid) }">
+                <label class="control-label"><i class="fa fa-key"></i> Password <sup style="color: red;">*</sup></label>
+                <input type="{{showPassword ? 'text' : 'password'}}" name="password" ng-model="model.signIn.password" required minlength="7" class="form-control" placeholder="">
+                <span ng-show="forms.signIn.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.signIn.password.$valid),'glyphicon-remove': ( forms.signIn.password.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.signIn.$submitted && forms.signIn.password.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>password</b> is required.
+                  </div>
+                  <div data-ng-message="minlength" >
+                    - The <b>password</b> must be at least 7 characters long.
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 10px;">
+                <input type="checkbox" ng-model="model.signIn.rememberMe"> Remember me
+              </div>
+
+              <!--<pre>{{model.signIn | json}}</pre>-->
+
+              <button  class="btn btn-warning" type="button" ng-click="resetSignInForm()"> Reset the form </button>
+              <button  class="btn btn-primary" type="submit" ng-click="signIn()"> Sign in </button>
+
+            </div>
+
+            <div class="text-center">OR</div>
+            <hr style="margin-top: 0;">
+
+            <div class="visible-xs-block visible-sm-block">
+              <a class="btn btn-block btn-social btn-facebook" ng-click="oauthLogin('facebook.com', true)" >
+                <i class="fa fa-facebook" aria-hidden="true"></i> Sign in with Facebook
+              </a>
+
+              <a class="btn btn-block btn-social btn-twitter" ng-click="oauthLogin('twitter.com', true)" >
+                <i class="fa fa-twitter" aria-hidden="true"></i> Sign in with Twitter
+              </a>
+
+              <a class="btn btn-block btn-social btn-google" ng-click="oauthLogin('google.com', true)" >
+                <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
+              </a>
+
+              <a class="btn btn-block btn-social btn-github" ng-click="oauthLogin('github.com', true)" >
+                <i class="fa fa-github" aria-hidden="true"></i> Sign in with Github
+              </a>
+            </div>
+            <div class="visible-md-block visible-lg-block">
+              <a class="btn btn-block btn-social btn-facebook" ng-click="oauthLogin('facebook.com')" >
+                <i class="fa fa-facebook" aria-hidden="true"></i> Sign in with Facebook
+              </a>
+
+              <a class="btn btn-block btn-social btn-twitter" ng-click="oauthLogin('twitter.com')" >
+                <i class="fa fa-twitter" aria-hidden="true"></i> Sign in with Twitter
+              </a>
+
+              <a class="btn btn-block btn-social btn-google" ng-click="oauthLogin('google.com')" >
+                <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
+              </a>
+
+              <a class="btn btn-block btn-social btn-github" ng-click="oauthLogin('github.com')" >
+                <i class="fa fa-github" aria-hidden="true"></i> Sign in with Github
+              </a>
+            </div>
+
+            <hr>
+            <div class="alert alert-info alert-xs" style="margin-bottom: 10px; margin-top: 10px; " role="alert">NOTE: This superscript <sup style="color: red;">*</sup> mean that, is required.</div>
+
+
+          </div>
+
+        </uib-tab>
+        <uib-tab heading="Register">
+
+          <div style="margin-top: 10px;">
+
+            <div ng-form="forms.register">
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.register.$submitted && forms.register.names.$valid),'has-error has-feedback': (forms.register.$submitted && forms.register.names.$invalid) }">
+                <label class="control-label"> Names <sup style="color: red;">*</sup></label>
+                <input type="text" name="names" ng-model="model.register.names" ng-trim no-special-chars required capitalize class="form-control" placeholder="">
+                <span ng-show="forms.register.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.register.names.$valid),'glyphicon-remove': ( forms.register.names.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.register.$submitted && forms.register.names.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>names</b> are required.
+                  </div>
+                  <div data-ng-message="noSpecialChars">
+                    - Not allowed to use special characters.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.register.$submitted && forms.register.lastNames.$valid),'has-error has-feedback': (forms.register.$submitted && forms.register.lastNames.$invalid) }">
+                <label class="control-label"> Last Names <sup style="color: red;">*</sup></label>
+                <input type="text" name="lastNames" ng-model="model.register.lastNames" ng-trim no-special-chars required capitalize class="form-control" placeholder="">
+                <span ng-show="forms.register.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.register.lastNames.$valid),'glyphicon-remove': ( forms.register.lastNames.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.register.$submitted && forms.register.lastNames.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>Last Names</b> are required.
+                  </div>
+                  <div data-ng-message="noSpecialChars">
+                    - Not allowed to use special characters.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.register.$submitted && forms.register.email.$valid),'has-error has-feedback': (forms.register.$submitted && forms.register.email.$invalid) }">
+                <label class="control-label"><i class="fa fa-envelope"></i> Email <sup style="color: red;">*</sup></label>
+                <input type="email" name="email" ng-model="model.register.email" required class="form-control" placeholder="">
+                <span ng-show="forms.register.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.register.email.$valid),'glyphicon-remove': ( forms.register.email.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.register.$submitted && forms.register.email.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>email</b> is required.
+                  </div>
+                  <div data-ng-message="email">
+                    - The <b>email</b> must be valid.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.register.$submitted && forms.register.password.$valid),'has-error has-feedback': (forms.register.$submitted && forms.register.password.$invalid) }">
+                <label class="control-label"><i class="fa fa-key"></i> Password <sup style="color: red;">*</sup></label>
+                <input
+                  class="form-control"
+                  type="password"
+                  name="password"
+                  ng-model="model.register.password"
+                  required
+                  minlength="7"
+                  maxlength="50"
+                  placeholder=""
+                  tr-trustpass="{
+										maximum: true,
+										messageGuide: 'Make sure your password meets these requirements:',
+									 	messageDone:'¡Excellent! Your password is acceptable.',
+									 	lowercaseLabel:'One lowercase character.',
+									 	uppercaseLabel:'One uppercase character.',
+									 	numberLabel:'One number.',
+									 	specialLabel:'One special character.',
+									 	minimumLabel:'Minimum characters:',
+									 	maximumLabel:'Maximum characters:'
+									}"
+                >
+                <span ng-show="forms.register.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.register.password.$valid),'glyphicon-remove': ( forms.register.password.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.register.$submitted && forms.register.password.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>new password</b> is required.
+                  </div>
+                  <div data-ng-message="minlength" >
+                    - The <b>new password</b> must be at least 7 characters long.
+                  </div>
+                  <div data-ng-message="trustpass" >
+                    - Make sure you meet the minimum requirements described above.
+                  </div>
+                </div>
+
+                <div>Password strength: {{passStrength}}%</div>
+                <div ng-password-strength="model.register.password" strength="passStrength" inner-class="progress-bar" inner-class-prefix="progress-bar-"></div>
+              </div>
+
+
+
+              <div class="form-group" ng-class="{'has-success has-feedback': (forms.register.$submitted && forms.register.samePassword.$valid),'has-error has-feedback': (forms.register.$submitted && forms.register.samePassword.$invalid) }">
+                <label class="control-label"><i class="fa fa-key"></i> Same Password <sup style="color: red;">*</sup></label>
+                <input type="password" name="samePassword" ng-model="model.register.samePassword" required match="model.register.password" minlength="7" class="form-control" placeholder="">
+                <span ng-show="forms.register.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.register.password.$valid),'glyphicon-remove': ( forms.register.password.$invalid) }" aria-hidden="true"></span>
+                <div data-ng-messages="forms.register.$submitted && forms.register.samePassword.$error" class="help-block">
+                  <div data-ng-message="required">
+                    - The <b>same password</b> is required.
+                  </div>
+                  <div data-ng-message="match">
+                    - The <b>passwords</b> do not match!.
+                  </div>
+                  <div data-ng-message="minlength" >
+                    - The <b>password</b> must be at least 7 characters long.
+                  </div>
+                </div>
+              </div>
+
+
+              <button  class="btn btn-warning" type="button" ng-click="resetRegisterForm()"> Reset the form </button>
+              <button  class="btn btn-primary" type="submit" ng-click="register()"> Sign in </button>
+
+
+            </div>
+
+            <hr>
+            <div class="alert alert-info alert-xs" style="margin-bottom: 10px; margin-top: 10px; " role="alert">NOTE: This superscript <sup style="color: red;">*</sup> mean that, is required.</div>
+
+          </div>
+
+        </uib-tab>
+        <uib-tab heading="Recover account">
+          <div ng-form="forms.recoverAccount" style="margin-top: 10px;">
+            <div class="form-group" ng-class="{'has-success has-feedback': (forms.recoverAccount.$submitted && forms.recoverAccount.email.$valid),'has-error has-feedback': (forms.recoverAccount.$submitted && forms.recoverAccount.email.$invalid) }">
+              <label class="control-label"><i class="fa fa-envelope"></i> Email <sup style="color: red;">*</sup></label>
+              <input type="email" name="email" ng-model="model.recoverAccount.email" required class="form-control" placeholder="">
+              <span ng-show="forms.recoverAccount.$submitted" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': (forms.recoverAccount.email.$valid),'glyphicon-remove': ( forms.recoverAccount.email.$invalid) }" aria-hidden="true"></span>
+              <div data-ng-messages="forms.recoverAccount.$submitted && forms.recoverAccount.email.$error" class="help-block">
+                <div data-ng-message="required">
+                  - The <b>email</b> is required.
+                </div>
+                <div data-ng-message="email">
+                  - The <b>email</b> must be valid.
+                </div>
+              </div>
+            </div>
+          </div>
+          <button  class="btn btn-primary" type="submit" ng-click="recover()"> Recover </button>
+          <hr>
+          <div class="alert alert-info alert-xs" style="margin-bottom: 10px; margin-top: 10px; " role="alert">NOTE: This superscript <sup style="color: red;">*</sup> mean that, is required.</div>
+        </uib-tab>
+      </uib-tabset>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+<script type="text/ng-template" id="promptForLinkCredentialModal.html">
+  <div class="modal-header">
+    <h3 class="modal-title">An account already exists with the same email address but different sign-in provider.</h3>
+  </div>
+  <div class="modal-body" cg-busy="{promise:httpRequestPromise,message:'Just a moment'}">
+
+    <p style="margin-bottom: 0;">
+      You can link you <span ng-bind="credential.provider"></span> account,
+      to the account already exists in this site, then you can login using whichever account you have registered in this site.
+    </p>
+
+    <ul class="list-unstyled">
+      <li ng-repeat="provider in providers" style="margin-top: 10px;">
+
+        <a ng-show="provider === 'password'" class="btn btn-block btn-social btn-reddit" ng-click="loginWith('password')">
+          <i class="fa fa-user" aria-hidden="true"></i> User email and Password
+        </a>
+
+        <div ng-show="provider !== 'password'">
+          <div class="visible-xs-block visible-sm-block">
+            <a ng-show="provider === 'facebook.com'" class="btn btn-block btn-social btn-facebook" ng-click="loginWith('facebook.com', true)" >
+              <i class="fa fa-facebook" aria-hidden="true"></i> Sign in with Facebook
+            </a>
+
+            <a ng-show="provider === 'twitter.com'" class="btn btn-block btn-social btn-twitter" ng-click="loginWith('twitter.com', true)" >
+              <i class="fa fa-twitter" aria-hidden="true"></i> Sign in with Twitter
+            </a>
+
+            <a ng-show="provider === 'google.com'" class="btn btn-block btn-social btn-google" ng-click="loginWith('google.com', true)" >
+              <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
+            </a>
+
+            <a ng-show="provider === 'github.com'" class="btn btn-block btn-social btn-github" ng-click="loginWith('github.com', true)" >
+              <i class="fa fa-github" aria-hidden="true"></i> Sign in with Github
+            </a>
+
+          </div>
+          <div class="visible-md-block visible-lg-block">
+            <a ng-show="provider === 'facebook.com'" class="btn btn-block btn-social btn-facebook" ng-click="loginWith('facebook.com')" >
+              <i class="fa fa-facebook" aria-hidden="true"></i> Sign in with Facebook
+            </a>
+
+            <a ng-show="provider === 'twitter.com'" class="btn btn-block btn-social btn-twitter" ng-click="loginWith('twitter.com')">
+              <i class="fa fa-twitter" aria-hidden="true"></i> Sign in with Twitter
+            </a>
+
+            <a ng-show="provider === 'google.com'" class="btn btn-block btn-social btn-google" ng-click="loginWith('google.com')" >
+              <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
+            </a>
+
+            <a ng-show="provider === 'github.com'" class="btn btn-block btn-social btn-github" ng-click="loginWith('github.com')" >
+              <i class="fa fa-github" aria-hidden="true"></i> Sign in with Github
+            </a>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+

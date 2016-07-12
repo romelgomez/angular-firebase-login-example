@@ -1,0 +1,22 @@
+<div class="panel panel-default" style="margin-top: 50px; margin-bottom: 0; " ng-controller="AccountProfileController" >
+  <div class="panel-body">
+
+    <div style="text-align: center; margin-top: -60px;">
+      <div class="photo" style="padding: 4px; border: solid 1px #A0A0A0; background: #FFFFFF;">
+        <img ng-src="{{firebaseUser.providerData[0].photoURL !== null? firebaseUser.providerData[0].photoURL : firebaseUser.photoURL}}" alt="avatar">
+      </div>
+      <div>
+        Hi <span style="color: #F0563D;">{{account.profile.names | capitalize}} {{account.profile.lastNames | capitalize}}</span>
+      </div>
+    </div>
+    <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+    <div class="list-group" style="margin-bottom: 0;">
+      <button type="button" class="list-group-item" ng-click="changeProfileDetails()">Extend or Change Profile Details</button>
+    </div>
+
+  </div>
+  <div class="panel-footer" ng-show="account.user.provider === 'password'">
+    <b>NOTE:</b> Change the Profile Image in <a href="http://www.gravatar.com/" target="_blank">Gravatar.com</a>
+  </div>
+</div>
