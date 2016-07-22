@@ -38,12 +38,10 @@ angular.module('login',['ngMessages','validation.match','trTrustpass','ngPasswor
                   notificationService.error('TODO set credential for: google.com');
                   break;
                 case 'twitter.com':
-                  console.log('TODO set credential for: twitter.com');
-                  notificationService.error('TODO set credential for: twitter.com');
+                  credential = firebase.auth.TwitterAuthProvider.credential($window.sessionStorage.getItem(authenticatedUser.email+'?accessToken'), $window.sessionStorage.getItem(authenticatedUser.email+'?secret'));
                   break;
                 case 'github.com':
-                  console.log('TODO set credential for: github.com');
-                  notificationService.error('TODO set credential for: github.com');
+                  credential = firebase.auth.GithubAuthProvider.credential($window.sessionStorage.getItem(authenticatedUser.email+'?accessToken'));
                   break;
               }
               if(typeof credential !== 'undefined' && credential !== null){
@@ -263,6 +261,18 @@ angular.module('login',['ngMessages','validation.match','trTrustpass','ngPasswor
 
           $window.sessionStorage.setItem(email+'?provider', result.credential.provider);
           $window.sessionStorage.setItem(email+'?accessToken', result.credential.accessToken);
+
+          switch(result.credential.provider) {
+            case 'facebook.com':
+              break;
+            case 'twitter.com':
+              $window.sessionStorage.setItem(email+'?secret', result.credential.secret);
+              break;
+            case 'google.com':
+              break;
+            case 'github.com':
+              break;
+          }
 
           if(result.credential.provider !== 'password'){
             $scope.oauthLogin(result.provider, result.redirect);
